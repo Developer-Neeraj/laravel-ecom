@@ -111,64 +111,66 @@ Back
 
          <div class="m-t-30">
             <h1 class="mb-2">Add Attribute</h1>
-            <div class="row" id="html_row_attr1">
-               <div class="col-lg-12">
+            <div class="row">
+            <div class="col-lg-12" id="html_row_attr1">
                   <div class="card">
                      <div class="card-body">
-                        <div class="row">
-                           <div class="form-group col-md-2">
-                              <label for="sku" class="control-label mb-1">SKU</label>
-                              <input type="text" name="sku[]" id="sku" class="form-control" required>
-                           </div>      
-                           <div class="form-group col-md-2">
-                              <label for="mrp" class="control-label mb-1">MRP</label>
-                              <input id="mrp" name="mrp[]" type="text" class="form-control" required>
-                           </div>
-                           <div class="form-group col-md-2">
-                              <label for="price" class="control-label mb-1">Price</label>
-                               <input id="price" name="price[]" type="text" class="form-control" required>
-                           </div>
-                           <div class="form-group col-md-3">
-                              <label for="size_id" class="control-label mb-1">Size</label>
-                              <select id="size_id" name="size[]" type="text" class="form-control" required>'
-                                 <option value="">Select Size</option>
-                                 @foreach ($size as $item)
-                                     <option value="">{{ $item->size }}</option>
-                                 @endforeach
-                              </select>
-                           </div>
-                           <div class="form-group col-md-3">
-                              <label for="color" class="control-label mb-1">Color</label>
-                              <select id="color" name="color[]" type="text" class="form-control" required>'
-                                 <option value="">Select Color</option>
-                                 @foreach ($color as $item)
-                                     <option value="">{{ $item->color }}</option>
-                                 @endforeach
-                              </select>
-                           </div>
-                           <div class="form-group col-md-2">
-                              <label for="qty" class="control-label mb-1">Qty</label>
-                              <input id="qty" name="qty[]" type="text" class="form-control" required>
-                           </div>
-                           <div class="form-group col-md-4">
-                              <label for="attr_images" class="control-label mb-1">Image</label>
-                              <input id="attr_images" name="attr_images[]" type="file" class="form-control" required>
-                           </div>
-                           <div class="form-group col-md-4">
-                              <label for="attr_images" class="control-label mb-1">
-                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                              </label>
-                              <div>
-                                 <button type="button" onclick="add_more()" class="btn btn-success">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                    &nbsp; Add
-                                 </button>
+                        <div class="form-group">
+                           <div class="row">
+                              <div class="form-group col-md-2">
+                                 <label for="sku" class="control-label mb-1">SKU</label>
+                                 <input type="text" name="sku[]" id="sku" class="form-control" required>
+                              </div>      
+                              <div class="form-group col-md-2">
+                                 <label for="mrp" class="control-label mb-1">MRP</label>
+                                 <input id="mrp" name="mrp[]" type="text" class="form-control" required>
+                              </div>
+                              <div class="form-group col-md-2">
+                                 <label for="price" class="control-label mb-1">Price</label>
+                                 <input id="price" name="price[]" type="text" class="form-control" required>
+                              </div>
+                              <div class="form-group col-md-3">
+                                 <label for="size_id" class="control-label mb-1">Size</label>
+                                 <select id="size_id" name="size[]" type="text" class="form-control" required>'
+                                    <option value="">Select Size</option>
+                                    @foreach ($size as $item)
+                                       <option value="">{{ $item->size }}</option>
+                                    @endforeach
+                                 </select>
+                              </div>
+                              <div class="form-group col-md-3">
+                                 <label for="color" class="control-label mb-1">Color</label>
+                                 <select id="color" name="color[]" type="text" class="form-control" required>'
+                                    <option value="">Select Color</option>
+                                    @foreach ($color as $item)
+                                       <option value="">{{ $item->color }}</option>
+                                    @endforeach
+                                 </select>
+                              </div>
+                              <div class="form-group col-md-2">
+                                 <label for="qty" class="control-label mb-1">Qty</label>
+                                 <input id="qty" name="qty[]" type="text" class="form-control" required>
+                              </div>
+                              <div class="form-group col-md-4">
+                                 <label for="attr_images" class="control-label mb-1">Image</label>
+                                 <input id="attr_images" name="attr_images[]" type="file" class="form-control" required>
+                              </div>
+                              <div class="form-group col-md-4">
+                                 <label for="attr_images" class="control-label mb-1">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                 </label>
+                                 <div>
+                                    <button type="button" onclick="add_more()" class="btn btn-success">
+                                       <i class="fa fa-plus" aria-hidden="true"></i>
+                                       &nbsp; Add
+                                    </button>
+                                 </div>
                               </div>
                            </div>
                         </div>
                      </div>
                   </div>
-               </div>
+            </div>
             </div>
          </div>
          
@@ -187,30 +189,12 @@ Back
    var loop_count = 1;
    function add_more() {
        loop_count++;
-       var html = '<div class="row" id="html_row_attr'+loop_count+'"><div class="col-lg-12"><div class="card"><div class="card-body"><div class="row">';
-           html+='<div class="form-group col-md-2">
-           <label for="sku" class="control-label mb-1">
-           SKU
-           </label>
-               <input type="text" name="sku[]" id="sku" class="form-control" required>
-           </div>';
-           html+= '<div class="form-group col-md-2">
-           <label for="mrp" class="control-label mb-1">
-           MRP
-           </label>
-           <input id="mrp" name="mrp[]" type="text" class="form-control" required>
-           </div>';
-           html+= '<div class="form-group col-md-2">
-           <label for="price" class="control-label mb-1">
-           Price
-           </label>
-            <input id="price" name="price[]" type="text" class="form-control" required>
-           </div>';
-       var sizeData = jQuery("#size").html();
-           html+= '<div class="form-group col-md-3">
-           <label for="size_id" class="control-label mb-1">
-           Size</label>
-           <select id="size_id" name="size[]" type="text" class="form-control" required>'
+       var html = '<div class="card" id="html_row_attr'+loop_count+'"><div class="card-body"><div class="form-group"><div class="row">';
+           html+='<div class="form-group col-md-2"><label for="sku" class="control-label mb-1">SKU</label><input type="text" name="sku[]" id="sku" class="form-control" required></div>';
+           html+= '<div class="form-group col-md-2"><label for="mrp" class="control-label mb-1">MRP</label><input id="mrp" name="mrp[]" type="text" class="form-control" required></div>';
+           html+= '<div class="form-group col-md-2"><label for="price" class="control-label mb-1">Price</label><input id="price" name="price[]" type="text" class="form-control" required></div>';
+       var sizeData = jQuery("#size_id").html();
+           html+= '<div class="form-group col-md-3"><label for="size_id" class="control-label mb-1">Size</label><select id="size_id" name="size[]" type="text" class="form-control" required>'
            +sizeData+
            '</select></div>';
        var colorData = jQuery("#color").html();
@@ -218,19 +202,10 @@ Back
            html+= '<div class="form-group col-md-3"><label for="color" class="control-label mb-1">Color</label><select id="color" name="color[]" type="text" class="form-control" required>'
                        +colorData+
                    '</select></div>';
-           html+=  '<div class="form-group col-md-2">
-           <label for="qty" class="control-label mb-1">
-           Qty</label>
-           <input id="qty" name="qty[]" type="text" class="form-control" required></div>';
-           html+=   '<div class="form-group col-md-4">
-           <label for="attr_images" class="control-label mb-1">Image</label>
-           <input id="attr_images" name="attr_images[]" type="file" class="form-control" required></div>';
-           html+=    '<div class="form-group col-md-4">
-           <label for="attr_images" class="control-label mb-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-           <div>
-           <button type="button" onclick="remove_more('+loop_count+')" class="btn btn-danger">
-           <i class="fa fa-minus" aria-hidden="true"></i>&nbsp; Remove</button></div></div>';            
-           html+= '</div></div></div></div>';
+           html+=  '<div class="form-group col-md-2"><label for="qty" class="control-label mb-1">Qty</label><input id="qty" name="qty[]" type="text" class="form-control" required></div>';
+           html+=   '<div class="form-group col-md-4"><label for="attr_images" class="control-label mb-1">Image</label><input id="attr_images" name="attr_images[]" type="file" class="form-control" required></div>';
+           html+=    '<div class="form-group col-md-4"><label for="attr_images" class="control-label mb-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><div><button type="button" onclick="remove_more('+loop_count+')" class="btn btn-danger"><i class="fa fa-minus" aria-hidden="true"></i>&nbsp; Remove</button></div></div>';            
+           html+= '</div></div></div><div>';
            jQuery("#html_row_attr1").append(html);
    }
    function remove_more(loop_count) {

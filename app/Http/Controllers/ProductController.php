@@ -51,8 +51,11 @@ class ProductController extends Controller
     }
 
     public function manage_product_process(Request $request) {
-        return $request->post();
-        die();
+        // return $request->post();
+        // echo "<pre>";
+        // print_r($request->post());
+        // echo "</pre>";
+        // die();
         if($request->post('id')>0) {
             $image_validation = "mimes:jpeg,jpg,png";
         } else {
@@ -91,6 +94,27 @@ class ProductController extends Controller
         $model->warranty = $request->post('warranty');
         $model->status = '1';
         $model->save();
+
+        /*Product attr Start*/
+        $skuAttr = $request->post('sku');
+        $mrpAttr = $request->post('mrp');
+        $priceAttr = $request->post('price');
+        $qtyAttr = $request->post('qty');
+        $sizeAttr = $request->post('size');
+        $colorAttr = $request->post('color');
+        foreach($skuAttr as $key=>$val) {
+            $productAttrArr['product_id'] = 1;
+            $productAttrArr['sku'] = $skuAttr[$key];
+            $productAttrArr['image'] = 'test';
+            $productAttrArr['mrp'] = $mrpAttr[$key];
+            $productAttrArr['price'] = $priceAttr[$key];
+            $productAttrArr['qty'] = $qtyAttr[$key];
+            $productAttrArr['size_id'] = $sizeAttr[$key];
+            $productAttrArr['color_id'] = $colorAttr[$key];
+        }
+        DB::table('products_attr')->insert;
+        /*Product attr End*/
+
         $request->session()->flash("message", $msg);
         return redirect('admin/product');
     }
