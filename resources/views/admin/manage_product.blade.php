@@ -113,28 +113,39 @@ Back
             <h1 class="mb-2">Add Attribute</h1>
             <div class="row">
             <div class="col-lg-12" id="html_row_attr1">
+               @foreach ($productAttrArr as $key=>$val)
+                  <?php
+                     $pARR = (array)$val;
+                     echo "<pre>";
+                     print_r($pARR);
+                     echo "</pre>";
+                  ?>
                   <div class="card">
                      <div class="card-body">
                         <div class="form-group">
                            <div class="row">
                               <div class="form-group col-md-2">
                                  <label for="sku" class="control-label mb-1">SKU</label>
-                                 <input type="text" name="sku[]" id="sku" class="form-control" required>
+                                 <input type="text" name="sku[]" value="{{ $pARR['sku'] }}" id="sku" class="form-control" required>
                               </div>      
                               <div class="form-group col-md-2">
                                  <label for="mrp" class="control-label mb-1">MRP</label>
-                                 <input id="mrp" name="mrp[]" type="text" class="form-control" required>
+                                 <input id="mrp" name="mrp[]" type="text" value="{{ $pARR['mrp'] }}" class="form-control" required>
                               </div>
                               <div class="form-group col-md-2">
                                  <label for="price" class="control-label mb-1">Price</label>
-                                 <input id="price" name="price[]" type="text" class="form-control" required>
+                                 <input id="price" name="price[]" value="{{ $pARR['price'] }}" type="text" class="form-control" required>
                               </div>
                               <div class="form-group col-md-3">
                                  <label for="size_id" class="control-label mb-1">Size</label>
                                  <select id="size_id" name="size[]" type="text" class="form-control" required>'
                                     <option value="">Select Size</option>
-                                    @foreach ($size as $item)
-                                       <option value="">{{ $item->size }}</option>
+                                    @foreach ($size as $list)
+                                       @if ($pARR['size_id'] == $list->id)
+                                          <option value="{{ $list->id }}" selected>{{ $list->size }}</option> 
+                                       @else
+                                          <option value="{{ $list->id }}">{{ $list->size }}</option> 
+                                       @endif
                                     @endforeach
                                  </select>
                               </div>
@@ -143,17 +154,21 @@ Back
                                  <select id="color" name="color[]" type="text" class="form-control" required>'
                                     <option value="">Select Color</option>
                                     @foreach ($color as $item)
-                                       <option value="">{{ $item->color }}</option>
+                                       @if ($pARR['color_id'] == $item->id)
+                                          <option value="{{ $item->id }}" selected>{{ $item->color }}</option> 
+                                       @else
+                                          <option value="{{ $item->id }}">{{ $item->color }}</option> 
+                                       @endif
                                     @endforeach
                                  </select>
                               </div>
                               <div class="form-group col-md-2">
                                  <label for="qty" class="control-label mb-1">Qty</label>
-                                 <input id="qty" name="qty[]" type="text" class="form-control" required>
+                                 <input id="qty" name="qty[]" value="{{ $pARR['qty'] }}" type="text" class="form-control" required>
                               </div>
                               <div class="form-group col-md-4">
                                  <label for="attr_images" class="control-label mb-1">Image</label>
-                                 <input id="attr_images" name="attr_images[]" type="file" class="form-control" required>
+                                 <input id="attr_images" name="attr_images[]" value="{{ $pARR['sku'] }}" type="file" class="form-control" required>
                               </div>
                               <div class="form-group col-md-4">
                                  <label for="attr_images" class="control-label mb-1">
@@ -170,6 +185,7 @@ Back
                         </div>
                      </div>
                   </div>
+               @endforeach
             </div>
             </div>
          </div>

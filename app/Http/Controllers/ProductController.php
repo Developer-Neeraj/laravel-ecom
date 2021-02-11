@@ -29,6 +29,8 @@ class ProductController extends Controller
             $result['uses'] = $arr['0']->uses;
             $result['warranty'] = $arr['0']->warranty;
             $result['id'] = $arr['0']->id;
+        
+            $result['productAttrArr'] = DB::table('products_attr')->where(['product_id'=>$id])->get();
         } else {
             $result['category_id'] = '';
             $result['name'] = '';
@@ -43,6 +45,15 @@ class ProductController extends Controller
             $result['uses'] = '';
             $result['warranty'] = '';
             $result['id'] = 0;
+
+            $result['productAttrArr'][0]['product_id'] = '';
+            $result['productAttrArr'][0]['sku'] = '';
+            $result['productAttrArr'][0]['image'] = '';
+            $result['productAttrArr'][0]['mrp'] = '';
+            $result['productAttrArr'][0]['price'] = '';
+            $result['productAttrArr'][0]['qty'] = '';
+            $result['productAttrArr'][0]['size_id'] = '';
+            $result['productAttrArr'][0]['color_id'] = '';
         }
         $result['category'] = DB::table('categories')->where(['status'=>1])->get();
         $result['size'] = DB::table('sizes')->where(['status'=>1])->get();
@@ -94,6 +105,7 @@ class ProductController extends Controller
         $model->warranty = $request->post('warranty');
         $model->status = '1';
         $model->save();
+        $pid = $model->id;
 
         /*Product attr Start*/
         $skuAttr = $request->post('sku');
@@ -103,16 +115,24 @@ class ProductController extends Controller
         $sizeAttr = $request->post('size');
         $colorAttr = $request->post('color');
         foreach($skuAttr as $key=>$val) {
-            $productAttrArr['product_id'] = 1;
+            $productAttrArr['product_id'] = $pid;
             $productAttrArr['sku'] = $skuAttr[$key];
             $productAttrArr['image'] = 'test';
             $productAttrArr['mrp'] = $mrpAttr[$key];
             $productAttrArr['price'] = $priceAttr[$key];
             $productAttrArr['qty'] = $qtyAttr[$key];
-            $productAttrArr['size_id'] = $sizeAttr[$key];
-            $productAttrArr['color_id'] = $colorAttr[$key];
+            if($sizeAttr[$key] == '') {
+                $productAttrArr['size_id'] = 0;
+            } else {
+                $productAttrArr['size_id'] = $sizeAttr[$key];
+            } 
+            if($colorAttr[$key] == '') {
+                $productAttrArr['color_id'] = 0;
+            } else {
+                $productAttrArr['color_id'] = $colorAttr[$key];
+            }
         }
-        DB::table('products_attr')->insert;
+            DB::table('products_attr')->insert($productAttrArr);
         /*Product attr End*/
 
         $request->session()->flash("message", $msg);
